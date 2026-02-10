@@ -351,18 +351,27 @@ tr:hover td {
 }
 
 .btn-danger {
-  background: rgba(239, 68, 68, 0.2);
-  color: #f87171;
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .btn-danger:hover {
-  background: rgba(239, 68, 68, 0.3);
+  background: #fecaca;
 }
 
 .comparison-table-wrapper {
-  background: rgba(15, 23, 42, 0.5);
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
   min-height: 200px;
   position: relative;
+  overflow: hidden;
 }
 
 .empty-state {
@@ -388,7 +397,8 @@ tr:hover td {
 }
 
 .editable-cell:focus {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.05);
+  /* Light grey tint */
   outline: none;
 }
 
@@ -404,19 +414,20 @@ tr:hover td {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
+  background: transparent;
   color: var(--text-main);
-  border: none;
+  border: 1px solid var(--border-color);
   padding: 1rem 2rem;
-  border-radius: 14px;
+  border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
   margin-left: 1rem;
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.03);
+  border-color: var(--text-muted);
 }
 
 /* Modal Styles */
@@ -436,23 +447,23 @@ tr:hover td {
 }
 
 .modal-content {
-  background: #1e293b;
+  background: #ffffff;
   width: 90%;
   max-width: 500px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
   animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
 .modal-header {
   padding: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(30, 41, 59, 0.5);
+  background: #fafafa;
 }
 
 .modal-header h3 {
@@ -472,7 +483,7 @@ tr:hover td {
 }
 
 .close-btn:hover {
-  color: #fff;
+  color: var(--primary);
 }
 
 .modal-body {
@@ -493,19 +504,19 @@ tr:hover td {
 .form-group input {
   width: 100%;
   padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #f9f9f8;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   color: var(--text-main);
   font-size: 1rem;
-  box-sizing: border-box;
-  /* Crucial for width: 100% */
+  transition: all 0.2s;
 }
 
 .form-group input:focus {
   outline: none;
   border-color: var(--primary);
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(156, 102, 68, 0.1);
 }
 
 .form-row {
