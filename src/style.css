@@ -514,7 +514,8 @@ tr:hover td {
 }
 
 .form-group input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.85);
+  /* Brighter placeholder */
 }
 
 .form-group input:focus {
@@ -665,11 +666,16 @@ tr:hover td {
 .supplier-card-header h4 input {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-main);
-  background: transparent;
-  border: none;
+  color: #ffffff;
+  background: var(--primary);
+  border: 1px solid var(--primary-hover);
+  border-radius: 8px;
   width: 100%;
-  padding: 0;
+  padding: 0.5rem 1rem;
+}
+
+.supplier-card-header h4 input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .supplier-card-header h4 input:focus {
@@ -715,17 +721,18 @@ tr:hover td {
 
 .detail-value input {
   width: 100%;
-  background: transparent;
-  /* No background for card inputs */
-  border: 1px solid transparent;
-  color: var(--text-main);
+  background: var(--primary);
+  border: 1px solid var(--primary-hover);
+  color: #ffffff;
   font-size: 1.1rem;
   font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
+  padding: 0.5rem;
+  border-radius: 8px;
   transition: all 0.2s;
-  margin-left: -0.5rem;
-  /* Optical alignment */
+}
+
+.detail-value input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .detail-value input:hover {
@@ -748,13 +755,19 @@ tr:hover td {
 .supplier-note textarea,
 .supplier-note input {
   width: 100%;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
+  background: var(--primary);
+  border: 1px solid var(--primary-hover);
+  color: #ffffff;
   font-size: 1rem;
   resize: none;
-  padding: 0;
+  padding: 0.75rem;
+  border-radius: 8px;
   font-family: inherit;
+}
+
+.supplier-note textarea::placeholder,
+.supplier-note input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .supplier-note input:focus {
