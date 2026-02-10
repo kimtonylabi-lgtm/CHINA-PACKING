@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>중국 용기 소싱 비교 | 프리미엄 컨테이너 솔루션</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700;800&display=swap"
+    rel="stylesheet">
+  <meta name="description" content="중국 현지 최고의 용기 파트너를 비교하고 최적의 소싱 솔루션을 찾으세요." />
+  <script type="module" crossorigin src="/assets/index-QNLRur7l.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-COotpN4-.css">
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h3>프로젝트 현황</h3>
+      <button class="icon-btn" onclick="window.toggleSidebar()">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item active" onclick="window.filterProjects('all')">
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <span class="status-dot all"></span>
+            전체 보기
+          </div>
+          <span id="count-all" class="count-badge">0</span>
+        </li>
+        <li class="nav-item" onclick="window.filterProjects('ongoing')">
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <span class="status-dot running"></span>
+            진행중 프로젝트
+          </div>
+          <span id="count-ongoing" class="count-badge">0</span>
+        </li>
+        <li class="nav-item" onclick="window.filterProjects('completed')">
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <span class="status-dot completed"></span>
+            완료 프로젝트
+          </div>
+          <span id="count-completed" class="count-badge">0</span>
+        </li>
+        <li class="nav-item" onclick="window.filterProjects('hold')">
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <span class="status-dot hold"></span>
+            보류 프로젝트
+          </div>
+          <span id="count-hold" class="count-badge">0</span>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Toggle Button (Visible when sidebar is hidden) -->
+  <button id="sidebar-toggle-btn" class="sidebar-toggle" onclick="window.toggleSidebar()">
+    ☰
+  </button>
+
+  <div id="app">
+    <section class="hero">
+      <div class="hero-subtag">Premium Container Sourcing</div>
+      <h1>브랜드의 가치를 완성하는<br />스마트 소싱 솔루션</h1>
+      <p>수천 개의 중국 현지 인프라 중 오직 검증된 제조사만 선별합니다.<br />단가 비교부터 QC 리포트까지, 브랜드사의 기준에 맞춘 전문 리포트를 제공합니다.</p>
+      <div class="actions">
+        <button class="btn-primary" id="start-project-btn">내 프로젝트 시작하기</button>
+        <button class="btn-secondary" id="view-guide-btn">소싱 가이드 보기</button>
+      </div>
+    </section>
+
+    <!-- Project Section -->
+    <section id="project-section" class="project-container">
+
+      <!-- View 1: Project List -->
+      <div id="project-list-view">
+        <div class="section-header">
+          <h2>📁 내 프로젝트 (My Projects)</h2>
+        </div>
+        <div class="project-controls" style="justify-content: center;">
+          <button id="create-project-btn" class="btn-primary" onclick="window.openProjectModal()">+ 새 프로젝트
+            만들기</button>
+        </div>
+        <div id="project-list" class="product-grid" style="margin-top: 1rem;">
+          <!-- Project Cards Rendered Here -->
+        </div>
+      </div>
+
+      <!-- View 2: Project Detail (Suppliers) -->
+      <div id="project-detail-view" style="display: none;">
+        <div class="section-header">
+          <h2>📊 실전 업체 비교</h2>
+          <p>후보 업체들의 견적을 비교하고 최적의 파트너를 선정하세요.</p>
+        </div>
+
+        <div class="project-controls">
+          <div style="display: flex; gap: 0.5rem; width: 100%;">
+            <button class="btn-icon" onclick="window.closeProjectView()" title="뒤로 가기" style="flex-shrink: 0;">⬅
+              목록으로</button>
+            <input type="text" id="project-name" placeholder="프로젝트명 (예: 미백 크림 50ml 용기)"
+              onchange="window.updateProjectName(this.value)" style="flex-grow: 1;">
+            <select id="project-status" class="status-select" onchange="window.updateProjectStatus(this.value)"
+              style="width: auto; min-width: 100px;">
+              <option value="ongoing">진행중</option>
+              <option value="completed">완료</option>
+              <option value="hold">보류</option>
+            </select>
+          </div>
+
+          <div class="action-group" style="margin-top: 1rem; width: 100%; justify-content: flex-end;">
+            <button id="add-supplier-btn" class="btn-secondary" style="background: var(--primary); color: white;">+ 업체
+              추가</button>
+            <button class="btn-icon" onclick="window.exportToPDF()" title="PDF로 저장">📄 PDF</button>
+            <button id="delete-project-btn" class="btn-danger btn-icon" onclick="window.deleteCurrentProject()">프로젝트
+              삭제</button>
+          </div>
+        </div>
+
+        <div class="supplier-card-wrapper">
+          <div id="supplier-list" class="supplier-grid">
+            <!-- JS에서 동적 생성 -->
+          </div>
+          <div id="empty-state" class="empty-state">
+            아직 비교할 업체가 없습니다.<br>'+ 업체 추가' 버튼을 눌러 정보를 입력하세요.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Reference Guide Section -->
+    <section id="guide-section" class="comparison-container" style="margin-top: 5rem;">
+      <h2 style="text-align: center; margin-bottom: 2rem;">💡 재질별 소싱 가이드 (참고용)</h2>
+
+      <div class="table-wrapper">
+        <table id="comparison-table">
+          <thead>
+            <tr>
+              <th style="width: 25%;">제품명 / 재질</th>
+              <th style="width: 20%;">관세율 (FTA 적용)</th>
+              <th style="width: 20%;">예상 식검비용</th>
+              <th style="width: 25%;">특징 및 주의사항</th>
+              <th style="width: 10%;">추천</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- JS에서 동적 생성 -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="product-grid" id="product-grid">
+        <!-- JS에서 동적 생성 -->
+      </div>
+
+      <section class="tips-section"
+        style="margin-top: 5rem; padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <h2 style="text-align: center; margin-bottom: 1rem;">성공적인 소싱을 위한 실무 팁</h2>
+        <div class="product-grid" id="tips-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+          <!-- JS에서 동적 생성 -->
+        </div>
+      </section>
+    </section>
+
+    <!-- Sub-Modal for Adding Supplier -->
+    <div id="supplier-modal" class="modal-overlay" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>새로운 업체 등록</h3>
+          <button class="close-btn" onclick="window.closeModal()">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>제품 사진</label>
+            <input type="file" id="modal-image" accept="image/*" class="file-input">
+          </div>
+          <div class="form-group">
+            <label>업체명</label>
+            <input type="text" id="modal-name" placeholder="업체 이름을 입력하세요">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>단가 (RMB/KRW)</label>
+              <input type="text" id="modal-price" class="number-input" placeholder="예: 750원">
+            </div>
+            <div class="form-group">
+              <label>MOQ</label>
+              <input type="text" id="modal-moq" class="number-input" placeholder="예: 10,000">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>금형비</label>
+              <input type="text" id="modal-moldCost" class="number-input" placeholder="비용 입력">
+            </div>
+            <div class="form-group">
+              <label>샘플비</label>
+              <input type="text" id="modal-sampleCost" class="number-input" placeholder="비용 입력">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>납기 (Lead Time)</label>
+            <input type="text" id="modal-leadTime" placeholder="예: 4주">
+          </div>
+          <div class="form-group">
+            <label>비고 / 평가</label>
+            <input type="text" id="modal-note" placeholder="메모할 내용 입력">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" onclick="window.closeModal()">취소</button>
+          <button class="btn-primary" onclick="window.saveSupplierFromModal()">등록하기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Creation Modal -->
+    <div class="modal-overlay" id="project-modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>새 프로젝트 만들기</h3>
+          <button class="close-btn" onclick="window.closeProjectModal()">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>대표 이미지</label>
+            <input type="file" id="project-modal-image" accept="image/*" class="file-input">
+          </div>
+          <div class="form-group">
+            <label>프로젝트명</label>
+            <input type="text" id="project-modal-name" placeholder="예: 미백 크림 50ml 용기">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" onclick="window.closeProjectModal()">취소</button>
+          <button class="btn-primary" onclick="window.createProjectFromModal()">생성하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
