@@ -973,14 +973,3 @@ tr:hover td {
   color: var(--text-main);
   padding: 0.5rem;
 }
-
-/* Utility: Mobile only line break */
-.mobile-br {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .mobile-br {
-    display: inline;
-  }
-}
